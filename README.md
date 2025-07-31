@@ -1,5 +1,26 @@
+<p align="center">
+  <img src="assets/banner.png" alt="Course-Correct Banner" width="100%" />
+</p>
+
+<p align="center">
+  <a href="https://expo.dev/">
+    <img alt="Built with Expo" src="https://img.shields.io/badge/built%20with-Expo-1f2024?logo=expo&logoColor=white">
+  </a>
+  <a href="https://github.com/Chasemako0/course-correct/blob/main/LICENSE">
+    <img alt="License: MIT" src="https://img.shields.io/github/license/Chasemako0/course-correct">
+  </a>
+  <a href="https://github.com/Chasemako0/course-correct/issues">
+    <img alt="Issues" src="https://img.shields.io/github/issues/Chasemako0/course-correct">
+  </a>
+  <a href="https://github.com/Chasemako0/course-correct/commits/main">
+    <img alt="Last Commit" src="https://img.shields.io/github/last-commit/Chasemako0/course-correct">
+  </a>
+</p>
+
+---
+
 # Course-Correct  
-A mobile productivity app for students, built with React Native and Supabase.
+A mobile productivity app for students built with React Native and Supabase.
 
 ## Overview
 
@@ -38,8 +59,6 @@ npx expo start
 
 ### 1. Create `supabase.js`
 
-Create a `supabase.js` file in the root of your project:
-
 ```js
 import { createClient } from '@supabase/supabase-js';
 
@@ -49,15 +68,11 @@ const supabaseAnonKey = 'your-anon-key';
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 ```
 
-Then add this line to `.gitignore`:
-
-```
-supabase.js
-```
+Then add `supabase.js` to `.gitignore`.
 
 ### 2. Create Tables in Supabase
 
-Open Supabase SQL Editor and run:
+Use the Supabase SQL Editor to run:
 
 ```sql
 -- Profiles
@@ -100,16 +115,14 @@ create table todos (
 );
 ```
 
-### 3. Enable and Set RLS (Row-Level Security)
+### 3. Enable RLS (Row-Level Security) and Set Policies
 
 ```sql
--- Enable RLS
 alter table profiles enable row level security;
 alter table course_notes enable row level security;
 alter table planner_tasks enable row level security;
 alter table todos enable row level security;
 
--- RLS Policies
 create policy "Users can manage their own profile"
 on profiles for all
 using (auth.uid() = id)
@@ -135,13 +148,12 @@ with check (auth.uid() = user_id);
 
 ```
 course-correct/
-│
-├── components/           # Shared UI components
-├── screens/              # CourseNote, Planner, ToDo, Quiz, Profile, etc.
-├── assets/               # Images and icons
-├── supabase.js           # Supabase config (ignored in git)
-├── .env                  # (Optional) for storing keys securely
-└── App.js                # Entry point
+├── components/
+├── screens/
+├── assets/
+├── supabase.js          # (ignored in git)
+├── .env                 # (optional)
+└── App.js
 ```
 
 ## Environment
@@ -149,17 +161,17 @@ course-correct/
 - Node.js v18+
 - Expo CLI
 - Supabase Project (Auth, DB, Storage)
-- Expo Go (for testing on device)
+- Expo Go
 
 ## Security
 
-- All keys stored in `supabase.js` (ignored in git)
-- Tables protected with Row-Level Security (RLS)
-- Authentication enforced on all user-specific data
+- API keys are kept in `supabase.js` (ignored in version control)
+- All data tables are protected with Row-Level Security (RLS)
+- Authentication is enforced at backend and frontend
 
 ## Contributions
 
-Pull requests are welcome. Open an issue first to suggest new features or improvements.
+Pull requests are welcome. Please open an issue to discuss any major feature changes.
 
 ## License
 
